@@ -1,38 +1,58 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Role for installing Emacs v25
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+N/A
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+If building emacs from source, the following variables needs to be defined:
+
+``` yaml
+BUILD_FROM_SRC: true
+emacs_version: 25.3
+emacs_ftp_url: http://ftpmirror.gnu.org/emacs
+emacs_sha256: "sha256:f72c6a1b48b6fbaca2b991eed801964a208a2f8686c70940013db26cd37983c9"
+emacs_build_dir: "/tmp/emacs-{{emacs_version}}"
+emacs_install_loc: /usr/local
+```
+
+If not building from source, emacs is installed using [ppa:kelleyk/emacs](https://launchpad.net/~kelleyk/+archive/ubuntu/emacs)
+
+
+SHA256 is the checksum that is used to verify the integrity of the download.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+``` yaml
+---
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- hosts: all
+  gather_facts: no
+
+  tasks:
+  - include_role:
+    name: emacs
+
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Mohit Sharma. Mohitsharma44@gmail.com
