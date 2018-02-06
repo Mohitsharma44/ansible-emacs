@@ -3,6 +3,8 @@ Role Name
 
 Role for installing Emacs v25
 
+[![Build Status](https://travis-ci.org/Mohitsharma44/ansible-emacs.svg?branch=master)](https://travis-ci.org/Mohitsharma44/ansible-emacs)
+
 Requirements
 ------------
 
