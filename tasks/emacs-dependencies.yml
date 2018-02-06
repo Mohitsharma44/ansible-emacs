@@ -1,0 +1,12 @@
+---
+
+- name: Installing dependencies
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - build-essential
+    - ncurses-dev
+    - git
+    - aspell-en

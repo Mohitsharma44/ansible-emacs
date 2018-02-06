@@ -1,0 +1,10 @@
+---
+# tasks file for emacs
+
+- include_tasks: "from-source.yml"
+  when: BUILD_FROM_SRC == true
+
+- include_tasks: "using-apt.yml"
+  when: BUILD_FROM_SRC == false
+
+- include_tasks: "emacs-prelude.yml"

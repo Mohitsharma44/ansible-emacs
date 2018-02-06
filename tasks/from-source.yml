@@ -1,0 +1,54 @@
+---
+
+- name: Including vars to build emacs
+  include_vars:
+    file: em-build-vars.yml
+
+- name: Install dependencies
+  include_tasks: emacs-dependencies.yml
+
+- name: Downloading Emacs '{{emacs_version}}'
+  become: yes
+  get_url:
+    url: '{{emacs_ftp_url}}/emacs-{{emacs_version}}.tar.gz'
+    dest: '{{emacs_build_dir}}'
+    checksum: '{{emacs_sha256}}'
+    mode: 0644
+
+- name: Unarchiving
+  become: yes
+  unarchive:
+    remote_src: yes
+    src: '{{emacs_build_dir}}'
+    dest: '{{emacs_install_loc}}'
+    creates: '{{emacs_install_loc}}/emacs-{{emacs_version}}'
+
+- name: Configuring
+  become: yes
+  command: ./configure --with-x=no
+  args:
+    chdir: '{{emacs_install_loc}}/emacs-{{emacs_version}}'
+    creates: '{{emacs_install_loc}}/emacs-{{emacs_version}}/Makefile'
+
+- name: Building
+  become: yes
+  command: make
+  args:
+    chdir: '{{emacs_install_loc}}/emacs-{{emacs_version}}'
+    creates: '{{emacs_install_loc}}/emacs-{{emacs_version}}/src/emacs'
+
+- name: Installing
+  become: yes
+  command: make install
+  args:
+    chdir: '{{emacs_install_loc}}/emacs-{{emacs_version}}'
+    creates: '/usr/local/bin/emacs'
+
+- name: Cleanup
+  become: yes
+  file:
+    path: '{{item}}'
+    state: absent
+  with_items:
+    - '{{emacs_build_dir}}'
+    - '{{emacs_install_loc}}/emacs-{{emacs_version}}'

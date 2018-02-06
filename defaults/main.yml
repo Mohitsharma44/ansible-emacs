@@ -1,0 +1,4 @@
+---
+# defaults file for emacs
+
+BUILD_FROM_SRC: true

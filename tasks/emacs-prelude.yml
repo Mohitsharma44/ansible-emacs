@@ -1,0 +1,14 @@
+---
+
+- name: Downloading Prelude
+  get_url:
+    url: https://raw.githubusercontent.com/bbatsov/prelude/master/utils/installer.sh
+    dest: /tmp/
+    mode: 0755
+  become: yes
+
+- name: Installing Prelude
+  shell: /tmp/installer.sh
+  args:
+    chdir: /tmp/
+    executable: /bin/sh
