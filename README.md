@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Role for installing Emacs v25
+Role for installing Emacs v25 and Prelude plugin
 
 [![Build Status](https://travis-ci.org/Mohitsharma44/ansible-emacs.svg?branch=master)](https://travis-ci.org/Mohitsharma44/ansible-emacs)
 
@@ -13,6 +13,7 @@ N/A
 Role Variables
 --------------
 
+### Emacs
 If building emacs from source, the following variables needs to be defined:
 
 ``` yaml
@@ -25,7 +26,6 @@ emacs_install_loc: /usr/local
 ```
 
 If not building from source, emacs is installed using [ppa:kelleyk/emacs](https://launchpad.net/~kelleyk/+archive/ubuntu/emacs)
-
 
 SHA256 is the checksum that is used to verify the integrity of the download.
 
