@@ -47,8 +47,8 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-      - 16.04
-      - 16.10
+      - xenial
+      - trusty
 
   galaxy_tags:
     - 'emacs'
